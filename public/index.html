@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>无间风云 - 线上桌游</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- 大厅界面 -->
+    <div id="lobby" class="screen active">
+      <h1>无间风云</h1>
+      <p class="subtitle">Good Cop Bad Cop 线上版</p>
+      
+      <div class="input-group">
+        <label>你的昵称</label>
+        <input type="text" id="playerName" placeholder="输入你的昵称" maxlength="10">
+      </div>
+
+      <div class="btn-group">
+        <button id="btnCreate" class="primary-btn">创建房间</button>
+        <div class="join-row">
+          <input type="text" id="roomIdInput" placeholder="输入房间号" maxlength="4">
+          <button id="btnJoin">加入房间</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 房间等待界面 -->
+    <div id="roomWait" class="screen">
+      <h2>房间号：<span id="roomIdDisplay"></span></h2>
+      <p class="tip">把房间号发给朋友，等人齐了开始游戏</p>
+      
+      <div class="player-list">
+        <h3>玩家列表</h3>
+        <ul id="playerList"></ul>
+      </div>
+
+      <button id="btnStart" class="primary-btn" style="display:none;">开始游戏</button>
+      <p id="waitTip" style="display:none;">等待房主开始游戏...</p>
+    </div>
+
+    <!-- 游戏主界面 -->
+    <div id="gameScreen" class="screen">
+      <div class="game-header">
+        <div>当前回合：<span id="currentTurn"></span></div>
+        <div>公共手枪：<span id="publicGun"></span></div>
+      </div>
+
+      <div class="game-main">
+        <div class="left-panel">
+          <h3>玩家状态</h3>
+          <div id="playerStatusList" class="status-list"></div>
+        </div>
+
+        <div class="center-panel">
+          <div class="my-info">
+            <h3>我的身份</h3>
+            <div id="myCards" class="my-cards"></div>
+            <div id="myCamp"></div>
+            <div id="myEquipment"></div>
+          </div>
+
+          <div class="action-panel" id="actionPanel">
+            <h3>我的行动</h3>
+            <div class="action-btns">
+              <button data-action="investigate">调查身份</button>
+              <button data-action="draw_equipment">抽装备牌</button>
+              <button data-action="take_gun">拿枪瞄准</button>
+              <button data-action="shoot">开枪射击</button>
+              <button data-action="use_equipment">使用装备</button>
+              <button id="btnEndTurn" class="primary-btn">结束回合</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-panel">
+          <h3>游戏日志</h3>
+          <div id="gameLog" class="log-box"></div>
+        </div>
+      </div>
+
+      <!-- 游戏结束弹窗 -->
+      <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+          <h2 id="winnerText"></h2>
+          <button onclick="location.reload()">再来一局</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 通用弹窗 -->
+    <div id="commonModal" class="modal">
+      <div class="modal-content">
+        <h3 id="modalTitle"></h3>
+        <div id="modalBody"></div>
+        <div class="modal-btns">
+          <button id="modalCancel">取消</button>
+          <button id="modalConfirm" class="primary-btn">确认</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
