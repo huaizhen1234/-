@@ -1,0 +1,198 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #1a1a2e;
+  color: #eee;
+  min-height: 100vh;
+}
+#app { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* 大厅 */
+#lobby {
+  max-width: 400px;
+  margin: 100px auto;
+  text-align: center;
+}
+#lobby h1 { font-size: 48px; margin-bottom: 8px; color: #e94560; }
+.subtitle { color: #888; margin-bottom: 40px; }
+.input-group { margin-bottom: 24px; text-align: left; }
+.input-group label { display: block; margin-bottom: 8px; color: #aaa; }
+input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #16213e;
+  color: #fff;
+  font-size: 16px;
+}
+.btn-group { display: flex; flex-direction: column; gap: 16px; }
+.primary-btn {
+  background: #e94560;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.primary-btn:hover { background: #d63850; }
+.join-row { display: flex; gap: 10px; }
+.join-row input { flex: 1; }
+.join-row button {
+  padding: 0 20px;
+  border: 1px solid #e94560;
+  background: transparent;
+  color: #e94560;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* 等待房间 */
+#roomWait { max-width: 500px; margin: 60px auto; text-align: center; }
+#roomWait h2 { font-size: 32px; margin-bottom: 8px; }
+#roomIdDisplay { color: #e94560; letter-spacing: 4px; }
+.tip { color: #888; margin-bottom: 30px; }
+.player-list {
+  background: #16213e;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+.player-list h3 { margin-bottom: 12px; }
+.player-list ul { list-style: none; }
+.player-list li {
+  padding: 10px 12px;
+  border-bottom: 1px solid #222;
+  display: flex;
+  justify-content: space-between;
+}
+.player-list li:last-child { border-bottom: none; }
+
+/* 游戏主界面 */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #16213e;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.game-main {
+  display: grid;
+  grid-template-columns: 240px 1fr 280px;
+  gap: 20px;
+}
+.left-panel, .center-panel, .right-panel {
+  background: #16213e;
+  border-radius: 12px;
+  padding: 20px;
+}
+h3 { margin-bottom: 16px; color: #e94560; }
+
+.status-list .player-item {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: #0f3460;
+}
+.status-list .player-item.dead { opacity: 0.5; text-decoration: line-through; }
+.status-list .player-item.current { border: 2px solid #e94560; }
+.player-item .name { font-weight: bold; margin-bottom: 4px; }
+.player-item .status { font-size: 12px; color: #aaa; }
+
+.my-cards {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.card-item {
+  flex: 1;
+  height: 80px;
+  background: #0f3460;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  text-align: center;
+  padding: 4px;
+}
+.card-item.cop { background: #2563eb; }
+.card-item.criminal { background: #dc2626; }
+.card-item.inspector { background: #1d4ed8; border: 2px solid #fbbf24; }
+.card-item.boss { background: #b91c1c; border: 2px solid #fbbf24; }
+
+#myCamp { margin-bottom: 12px; font-weight: bold; }
+#myEquipment { color: #fbbf24; margin-bottom: 20px; min-height: 24px; }
+
+.action-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.action-btns button {
+  padding: 12px;
+  border: 1px solid #333;
+  background: #0f3460;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.action-btns button:disabled { opacity: 0.4; cursor: not-allowed; }
+#btnEndTurn { grid-column: span 2; margin-top: 8px; }
+
+.log-box {
+  height: 400px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.log-box p { padding: 4px 0; border-bottom: 1px solid #222; }
+
+/* 弹窗 */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal.active { display: flex; }
+.modal-content {
+  background: #16213e;
+  padding: 30px;
+  border-radius: 12px;
+  min-width: 320px;
+  max-width: 90%;
+}
+.modal-content h2, .modal-content h3 { margin-bottom: 20px; }
+.modal-btns {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+.modal-btns button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #333;
+  color: white;
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+  .game-main { grid-template-columns: 1fr; }
+  .log-box { height: 200px; }
+}
